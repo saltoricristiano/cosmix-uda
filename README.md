@@ -2,7 +2,7 @@
 
 The official implementation of our work "CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation".
 
-![video](assets/cosmix.mov)
+![video](assets/cosmix_compressed.mp4)
 
 ## Introduction
 
@@ -14,21 +14,39 @@ Each branch operates on one domain by mixing selected pieces of data from the ot
 
 For more information follow the [PAPER]() link (:fire: COOMING SOON :fire:)!
 
+Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAAAAJ&hl),
+         [Fabio Galasso](https://scholar.google.com/citations?user=2gSuGBEAAAAJ&hl),
+         [Giuseppe Fiameni](https://scholar.google.com/citations?user=Se2mLvIAAAAJ&hl),
+         [Nicu Sebe](https://scholar.google.it/citations?user=tNtjSewAAAAJ&hl),
+         [Elisa Ricci](https://scholar.google.ca/citations?user=xf1T870AAAAJ&hl),
+         [Fabio Poiesi](https://scholar.google.co.uk/citations?user=BQ7li6AAAAAJ&hl)
+
 ![teaser](assets/mix_teaser_complex.jpg)
 
 ## News :bell:
-- 7/2022: CoSMix code is **OUT**!
-- 7/2022: CoSMix is accepted to ECCV 2022!:fire:
-- 7/2022: CoSMix repository has been created! Our work is the first using compositional mix between domains to allow adaptation in LiDAR segmentation!
+- 7/2022: CoSMix code has been **RELEASED**!
+- 7/2022: CoSMix is accepted to ECCV 2022!:fire: Our work is the first using compositional mix between domains to allow adaptation in LiDAR segmentation!
 
 ## Installation
-
+The code has been tested with Docker (see Docker container below) with Python 3.8, CUDA 10.2/11.1, pytorch 1.8.0 and pytorch-lighting 1.4.1.
+Any other version may requireq to update the code for compatibility.
 
 ### Pip/Venv/Conda
+In your virtual environment follow [MinkowskiEnginge](https://github.com/NVIDIA/MinkowskiEngine).
+This will install all the base packages.
 
+Additionally, you need to install:
+- [open3d 0.13.0](http://www.open3d.org)
+- [pytorch-lighting 1.4.1](https://www.pytorchlightning.ai)
+- tqdm
+- pickle
 
+If you want to work on nuScenes you need to install
+- [nuscenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
 
-### Docker
+### Docker container
+If you want to use Docker you can find a ready-to-use container at ```crissalto/online-adaptation-mink:1.3```, just be sure to have installed drivers compatible with CUDA 11.1.
+
 
 
 
