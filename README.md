@@ -4,7 +4,7 @@ The official implementation of our work "CoSMix: Compositional Semantic Mix for 
 
 
 
-https://user-images.githubusercontent.com/56728964/177744041-9a486a32-e2d5-4049-a524-692830eae2be.mp4
+![video](https://user-images.githubusercontent.com/56728964/177744041-9a486a32-e2d5-4049-a524-692830eae2be.mp4)
 
 
 
