@@ -42,11 +42,10 @@ This will install all the base packages.
 Additionally, you need to install:
 - [open3d 0.13.0](http://www.open3d.org)
 - [pytorch-lighting 1.4.1](https://www.pytorchlightning.ai)
+- [wandb](https://docs.wandb.ai/quickstart)
 - tqdm
 - pickle
 
-If you want to work on nuScenes you need to install
-- [nuscenes-devkit](https://github.com/nutonomy/nuscenes-devkit)
 
 ### Docker container
 If you want to use Docker you can find a ready-to-use container at ```crissalto/online-adaptation-mink:1.3```, just be sure to have installed drivers compatible with CUDA 11.1.
@@ -100,7 +99,7 @@ To download SemanticKITTI follow the instructions [here](http://www.semantic-kit
 ```
 
 ### SemanticPOSS
-To download SemanticPOSS follow the instructions [here](). Then, prepare the paths as follows:
+To download SemanticPOSS follow the instructions [here](http://www.poss.pku.edu.cn/semanticposs.html). Then, prepare the paths as follows:
 ```
 ./
 ├── 
@@ -116,10 +115,11 @@ To download SemanticPOSS follow the instructions [here](). Then, prepare the pat
             |   |      ├── 000000.label
             |   |      ├── 000001.label
             |   |      └── ...
+            |   ├── tag
             |   ├── calib.txt
             |   ├── poses.txt
-            |   └── times.txt
-            └── 08/
+            |   └── instances.txt
+            └── 06/
 ```
 
 
@@ -133,23 +133,68 @@ ln -s PATH/TO/SEMANTICKITTI SemanticKITTI
 
 ## Source training
 
-We use SynLiDAR as source synthetic dataset. To train the source model on SynLIDAR use
+We use SynLiDAR as source synthetic dataset. 
+The first stage of CoSMix consists of a warm-up stage in which the teacher is pretrained on the source dataset.
+To warm-up the segmentation model on SynLiDAR2SemanticKITTI run
+
 ```
-python 
+python train_source.py --config_file configs/source/synlidar2semantickitti.yaml
 ```
 
-**NB:** we provide pretrained models in ```pretrained_models```, so you can skip this time consuming step!:rocket:
+
+while to warm-up the segmentation model on SynLiDAR2SemanticPOSS run
+
+```
+python train_source.py --config_file configs/source/synlidar2semanticposs.yaml
+```
+
+**NB:** we provide source pretrained models, so you can skip this step and move directly on adaptation! :rocket:
+
+## Pretrained models :rocket:
+
+You can download the pretrained models on both SynLiDAR2SemanticKITTI and SynLiDAR2SemanticPOSS form [here](https://drive.google.com/file/d/1cwRaIobmU0-DKDaic6Y7UX03O7MAFBV5/view?usp=sharing) and decompress them in ```cosmix-uda/pretrained_models/```.
+
 
 ## Target adaptation
 
-Adapt to the target domain with
+To adapt with CoSMix on SynLiDAR2SemanticKITTI run
 
 ```
-python 
+python adapt_cosmix.py --config_file configs/adaptation/synlidar2semantickitti_cosmix.yaml
 ```
+
+while to adapt with CoSMix on SynLiDAR2SemanticPOSS run
+
+```
+python adapt_cosmix.py --config_file configs/adaptation/synlidar2semanticposs_cosmix.yaml
+```
+
+## Evaluation
+
+To evaluate pretrained models after warm-up
+```
+python eval.py --config_file configs/config-file-of-the-experiment.yaml --resume_path PATH-TO-EXPERIMENT
+```
+
+with ```--eval_source``` for running evaluation on source data and ```--eval_target``` on target data.
+This will iterate over all the checkpoints and run evaluation of all the checkpoints in ```PATH-TO-EXPERIMENT/checkpoints/```.
+
+Similarly, after adaptation use
+```
+python eval.py --config_file configs/config-file-of-the-experiment.yaml --resume_path PATH-TO-EXPERIMENT --is_student
+```
+
+Where ```--is_student``` specifies that the model to be evaluated is a student model.
+
+You can save predictions for future visualizations by adding ```--save_predictions```.
+
+## References
+References will be uploaded SOON !:rocket:
 
 ## Acknowledgments
 The work was partially supported by OSRAM GmbH,  by the Italian Ministry of Education, Universities and Research (MIUR) ”Dipartimenti di Eccellenza 2018-2022”, by the SHIELD project, funded by the European Union’s Joint Programming Initiative – Cultural Heritage, Conservation, Protection and Use joint call and, it was carried out in the Vision and Learning joint laboratory of FBK and UNITN.
 
 
 ## Thanks
+
+We thank the opensource project [MinkowskiEngine](https://github.com/NVIDIA/MinkowskiEngine).

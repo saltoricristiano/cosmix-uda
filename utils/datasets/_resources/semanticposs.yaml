@@ -1,0 +1,47 @@
+# This file is covered by the LICENSE file in the root of this project.
+# original labels
+labels:
+  0: "unlabeled"
+  4: "1 person"
+  5: "2+ person"
+  6: "rider"
+  7: "car"
+  8: "trunk"
+  9: "plants"
+  10: "traffic sign 1" # standing sign
+  11: "traffic sign 2" # hanging sign
+  12: "traffic sign 3" # high/big hanging sign
+  13: "pole"
+  14: "garbage-can"
+  15: "building"
+  16: "cone/stone"
+  17: "fence"
+  21: "bike"
+  22: "ground"
+
+# mapped labels
+learning_map:
+  0: -1   # "unlabeled",
+  1: -1
+  2: -1
+  3: -1
+  4: 0   # "person",
+  5: 0  # "person",
+  6: 1   # "rider",
+  7: 2   # "car",
+  8: 3   # "trunk",
+  9: 4   # "plants",
+  10: 5   #  "traffic sign"
+  11: 5   #  "traffic sign"
+  12: 5   #  "traffic sign"
+  13: 6   #  "pole",
+  14: 7   #  "garbage-can",
+  15: 8   #  "building",
+  16: 9   #  "cone/stone",
+  17: 10   #  "fence",
+  18: -1
+  19: -1
+  20: -1
+  21: 11   #  "bike",
+  22: 12   #  "ground"
+
