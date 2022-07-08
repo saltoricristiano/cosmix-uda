@@ -56,7 +56,7 @@ pipeline:
     clear_cache_int: 1
     resume_checkpoint: null
     val_check_interval: 1.0
-    num_sanity_val_steps: 0
+    num_sanity_val_steps: 2
 
   wandb:
     run_name: 'CoSMix-adaptation-SynLiDAR2SemanticKITTI'
