@@ -46,6 +46,6 @@ pipeline:
 
   wandb:
     run_name: 'SOURCE-WARMUP-SynLiDAR2SemanticKITTI'
-    project_name: 'eccv2022-sfuda'
-    entity_name: 'unitn-mhug-csalto'
+    project_name: 'cosmix-uda'
+    entity_name: 'amazing-name'
     offline: false
