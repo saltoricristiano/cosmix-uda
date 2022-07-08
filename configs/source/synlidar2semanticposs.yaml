@@ -6,7 +6,7 @@ model:
 dataset:
   version: 'full'
   name: 'SynLiDAR'
-  dataset_path: '../../data/SynLiDAR'
+  dataset_path: 'data/SynLiDAR'
   mapping_path: '_resources/synlidar_semanticposs.yaml'
   target: 'SemanticPOSS'
   voxel_size: 0.05
