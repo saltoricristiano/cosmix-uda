@@ -150,6 +150,9 @@ python train_source.py --config_file configs/source/synlidar2semanticposs.yaml
 
 **NB:** we provide source pretrained models, so you can skip this step and move directly on adaptation! :rocket:
 
+**NB:** the code uses wandb for logs. Follow the instructions [here](https://docs.wandb.ai/quickstart) and update your ```config.wandb.project_name``` and ```config.wandb.entity_name```.
+
+
 ## Pretrained models :rocket:
 
 You can download the pretrained models on both SynLiDAR2SemanticKITTI and SynLiDAR2SemanticPOSS form [here](https://drive.google.com/file/d/1cwRaIobmU0-DKDaic6Y7UX03O7MAFBV5/view?usp=sharing) and decompress them in ```cosmix-uda/pretrained_models/```.
