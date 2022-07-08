@@ -40,7 +40,7 @@ pipeline:
   save_dir: 'experiments/cosmix/synlidar/semantickitti'
 
   dataloader:
-    train_batch_size: 4
+    train_batch_size: 2
     val_batch_size: 8
     num_workers: 24
 
