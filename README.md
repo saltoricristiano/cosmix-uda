@@ -2,9 +2,7 @@
 
 The official implementation of our work "CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation".
 
-<p align="center">
-  <img src="[http://some_place.com/image.png](https://user-images.githubusercontent.com/56728964/179712346-f3600c04-7468-41dc-b1df-5478acf4668f.gif)" />
-</p>
+![output](https://user-images.githubusercontent.com/56728964/179716779-09e4b4bb-a7b3-4364-83ec-e876ca359adf.gif)
 
 
 ## Introduction
