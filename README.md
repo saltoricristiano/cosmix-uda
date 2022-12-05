@@ -2,10 +2,7 @@
 
 The official implementation of our work "CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation".
 
-
-
-![video](https://user-images.githubusercontent.com/56728964/177744041-9a486a32-e2d5-4049-a524-692830eae2be.mp4)
-
+![output](https://user-images.githubusercontent.com/56728964/179716779-09e4b4bb-a7b3-4364-83ec-e876ca359adf.gif)
 
 
 ## Introduction
@@ -16,7 +13,7 @@ We propose a new approach of sample mixing for point cloud UDA, namely Compositi
 CoSMix consists of a two-branch symmetric network that can process synthetic labelled data (source) and real-world unlabelled point clouds (target) concurrently.
 Each branch operates on one domain by mixing selected pieces of data from the other one, and by using the semantic information derived from source labels and target pseudo-labels.
 
-For more information follow the [PAPER]() link (:fire: COOMING SOON :fire:)!
+:fire: For more information follow the [PAPER](https://arxiv.org/abs/2207.09778) link!:fire:
 
 Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAAAAJ&hl),
          [Fabio Galasso](https://scholar.google.com/citations?user=2gSuGBEAAAAJ&hl),
