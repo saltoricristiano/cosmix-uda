@@ -190,7 +190,17 @@ Where ```--is_student``` specifies that the model to be evaluated is a student m
 You can save predictions for future visualizations by adding ```--save_predictions```.
 
 ## References
-References will be uploaded SOON !:rocket:
+If you use our work, please cite us:
+```
+@inproceedings{saltori2022cosmix,
+  title={Cosmix: Compositional semantic mix for domain adaptation in 3d lidar segmentation},
+  author={Saltori, Cristiano and Galasso, Fabio and Fiameni, Giuseppe and Sebe, Nicu and Ricci, Elisa and Poiesi, Fabio},
+  booktitle={European Conference on Computer Vision},
+  pages={586--602},
+  year={2022},
+  organization={Springer}
+}
+```
 
 ## Acknowledgments
 The work was partially supported by OSRAM GmbH,  by the Italian Ministry of Education, Universities and Research (MIUR) ”Dipartimenti di Eccellenza 2018-2022”, by the SHIELD project, funded by the European Union’s Joint Programming Initiative – Cultural Heritage, Conservation, Protection and Use joint call and, it was carried out in the Vision and Learning joint laboratory of FBK and UNITN.
