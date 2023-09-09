@@ -25,7 +25,7 @@ Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAA
 ![teaser](assets/mix_teaser_complex.jpg)
 
 ## News :bell:
-- 8/2023: CoSMix extension to one-shot SSDA has been accepted at T-PAMI! We will update the code soon! [Paper link](https://ieeexplore.ieee.org/document/10234713)
+- 8/2023: CoSMix extension to one-shot SSDA has been accepted at T-PAMI!:fire: We will update the code soon! [Paper link](https://ieeexplore.ieee.org/document/10234713)
 - 12/2022: CoSMix leads the new SynLiDAR to SemanticKITTI [benchmark](https://paperswithcode.com/sota/3d-unsupervised-domain-adaptation-on-synlidar)! :rocket:
 - 7/2022: CoSMix code has been **RELEASED**!
 - 7/2022: CoSMix is accepted to ECCV 2022!:fire: Our work is the first using compositional mix between domains to allow adaptation in LiDAR segmentation!
