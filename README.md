@@ -13,7 +13,7 @@ We propose a new approach of sample mixing for point cloud UDA, namely Compositi
 CoSMix consists of a two-branch symmetric network that can process synthetic labelled data (source) and real-world unlabelled point clouds (target) concurrently.
 Each branch operates on one domain by mixing selected pieces of data from the other one, and by using the semantic information derived from source labels and target pseudo-labels.
 
-:fire: For more information follow the [PAPER](https://arxiv.org/abs/2207.09778) link!:fire:
+:fire: For more information follow the [PAPER](https://ieeexplore.ieee.org/document/10234713) link!:fire:
 
 Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAAAAJ&hl),
          [Fabio Galasso](https://scholar.google.com/citations?user=2gSuGBEAAAAJ&hl),
@@ -25,6 +25,7 @@ Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAA
 ![teaser](assets/mix_teaser_complex.jpg)
 
 ## News :bell:
+- 8/2023: CoSMix extension to one-shot SSDA has been accepted at T-PAMI! We will update the code soon! [Paper link](https://ieeexplore.ieee.org/document/10234713)
 - 12/2022: CoSMix leads the new SynLiDAR to SemanticKITTI [benchmark](https://paperswithcode.com/sota/3d-unsupervised-domain-adaptation-on-synlidar)! :rocket:
 - 7/2022: CoSMix code has been **RELEASED**!
 - 7/2022: CoSMix is accepted to ECCV 2022!:fire: Our work is the first using compositional mix between domains to allow adaptation in LiDAR segmentation!
@@ -192,6 +193,14 @@ You can save predictions for future visualizations by adding ```--save_predictio
 ## References
 If you use our work, please cite us:
 ```
+@article{saltori2023compositional,
+  title={Compositional Semantic Mix for Domain Adaptation in Point Cloud Segmentation},
+  author={Saltori, Cristiano and Galasso, Fabio and Fiameni, Giuseppe and Sebe, Nicu and Poiesi, Fabio and Ricci, Elisa},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2023},
+  publisher={IEEE}
+}
+
 @inproceedings{saltori2022cosmix,
   title={Cosmix: Compositional semantic mix for domain adaptation in 3d lidar segmentation},
   author={Saltori, Cristiano and Galasso, Fabio and Fiameni, Giuseppe and Sebe, Nicu and Ricci, Elisa and Poiesi, Fabio},
@@ -203,8 +212,7 @@ If you use our work, please cite us:
 ```
 
 ## Acknowledgments
-The work was partially supported by OSRAM GmbH,  by the Italian Ministry of Education, Universities and Research (MIUR) ”Dipartimenti di Eccellenza 2018-2022”, by the SHIELD project, funded by the European Union’s Joint Programming Initiative – Cultural Heritage, Conservation, Protection and Use joint call and, it was carried out in the Vision and Learning joint laboratory of FBK and UNITN.
-
+This work was partially supported by OSRAM GmbH, by the MUR PNRR project FAIR (PE00000013) funded by the NextGenerationEU, by the EU project FEROX Grant Agreement no 101070440, by the PRIN PREVUE (Prot. 2017N2RK7K), the EU ISFP PROTECTOR (101034216) and the EU H2020 MARVEL (957337) projects and, it was carried out in the Vision and Learning joint laboratory of FBK and UNITN.
 
 ## Thanks
 
