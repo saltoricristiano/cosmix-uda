@@ -218,12 +218,6 @@ class PLTTester(pl.core.LightningModule):
 
         self.ignore_label = self.dataset.ignore_label
 
-        # if criterion == 'CELoss':
-        #     self.criterion = CELoss(ignore_label=self.ignore_label,
-        #                             weight=None)
-        # else:
-        #     raise NotImplementedError
-
     def test_step(self, batch, batch_idx, dataloader_idx=0):
         phase = 'test'
         stensor = ME.SparseTensor(coordinates=batch["coordinates"].int(), features=batch["features"])

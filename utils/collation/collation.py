@@ -272,3 +272,33 @@ class CollateMixedMasked:
                 "s2t_masked_source_mask": source_masked_mask,
                 "s2t_masked_target_mask": target_masked_mask}
 
+
+class CollateSSDA:
+    def __init__(self, ssda_sampler, device=None):
+        self.device = device
+        self.ssda_sampler = ssda_sampler
+
+    def __call__(self, list_data):
+        r"""
+        Collation function for MinkowskiEngine.SparseTensor that creates batched
+        coordinates given a list of dictionaries.
+        """
+        list_d = []
+        list_idx = []
+        for d in list_data:
+            list_d.append((d["coordinates"].to(self.device), d["features"].to(self.device), d["labels"]))
+            list_idx.append(d["idx"].view(-1, 1))
+
+        ssda_frame = self.ssda_sampler.get_frame()
+
+        list_d.append((ssda_frame["coordinates"].to(self.device), ssda_frame["features"].to(self.device), ssda_frame["labels"]))
+        list_idx.append(ssda_frame["idx"].view(-1, 1))
+
+        coordinates_batch, features_batch, labels_batch = ME.utils.SparseCollation(dtype=torch.float32,
+                                                                                   device=self.device)(list_d)
+        idx = torch.cat(list_idx, dim=0)
+        return {"coordinates": coordinates_batch,
+                "features": features_batch,
+                "labels": labels_batch,
+                "idx": idx}
+

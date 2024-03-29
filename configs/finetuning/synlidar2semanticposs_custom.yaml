@@ -1,0 +1,97 @@
+model:
+  name: 'MinkUNet34'
+  in_feat_size: 1
+  out_classes: 13
+
+source_dataset:
+  version: 'full'
+  name: 'SynLiDAR'
+  dataset_path: 'data/SynLiDAR'
+  mapping_path: '_resources/synlidar_semanticposs.yaml'
+  weights_path: '_weights/synlidar2semanticposs.npy'
+  target: null
+  voxel_size: 0.05
+  num_pts: 50000
+  ignore_label: -1
+  augment_data: false
+
+target_dataset:
+  version: 'full'
+  name: 'SemanticPOSS'
+  dataset_path: 'data/SemanticPOSS/sequences'
+  mapping_path: '_resources/semanticposs.yaml'
+  target: null
+  voxel_size: 0.05
+  num_pts: 50000
+  ignore_label: -1
+  augment_data: false
+
+masked_dataset:
+  augment_data: true
+  augment_mask_data: true
+  remove_overlap: false
+
+pipeline:
+  epochs: 2
+  steps: null
+  gpus: [0, 1]
+  precision: 32
+  seed: 1234
+  save_dir: 'experiments/symmetric/synlidar/semanticposs'
+
+  dataloader:
+    train_batch_size: 4
+    val_batch_size: 8
+    num_workers: 24
+
+  optimizer:
+    name: 'SGD'
+    lr: 0.0001
+
+  scheduler:
+    name: null
+
+  lightning:
+    check_val_every_n_epoch: 1
+    clear_cache_int: 1
+    resume_checkpoint: null
+    val_check_interval: 1.0
+    num_sanity_val_steps: 2
+
+  wandb:
+    run_name: 'FINETUNING-SSDA-SEMANTICPOSS-CUSTOM'
+    project_name: 'cosmix-ssda'
+    entity_name: 'amazing-name'
+    offline: true
+
+adaptation:
+  student_checkpoint: 'pretrained_models/synlidar/semanticposs/pretrained_model.ckpt'
+  teacher_checkpoint: 'pretrained_models/synlidar/semanticposs/pretrained_model.ckpt'
+  filtering: 'confidence'
+  adaptive_weight: false
+  oracle_rate: 0.0
+  shuffle_batches: false
+  compositional: false
+  source_filtering: false
+  propagation: false
+  propagation_size: 0
+  weighted_sampling: true
+  self_paced: false
+  is_mix3d: false
+  is_mix3d_pseudo: false
+  selection_perc: 0.5
+  remove_class: null
+  target_confidence_th: 0.85
+
+  ssda_sampler:
+    method: 'custom'
+    num_frames: 1
+
+  losses:
+    source_criterion: 'SoftDICELoss'
+    target_criterion: 'SoftDICELoss'
+    other_criterion: null
+    source_weight: 1.0
+    target_weight: 1.0
+    other_weight: 0.
+

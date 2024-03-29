@@ -1,6 +1,6 @@
-# **CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation [ECCV2022]**
+# **CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation [ECCV2022 - TPAMI]**
 
-The official implementation of our work "CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation".
+The official implementation of our works "CoSMix: Compositional Semantic Mix for Domain Adaptation in 3D LiDAR Segmentation" and "Compositional Semantic Mix for Domain Adaptation in Point Cloud Segmentation".
 
 ![output](https://user-images.githubusercontent.com/56728964/179716779-09e4b4bb-a7b3-4364-83ec-e876ca359adf.gif)
 
@@ -12,6 +12,8 @@ Meanwhile, researchers working on UDA problems in the image domain have shown th
 We propose a new approach of sample mixing for point cloud UDA, namely Compositional Semantic Mix (CoSMix), the first UDA approach for point cloud segmentation based on sample mixing.
 CoSMix consists of a two-branch symmetric network that can process synthetic labelled data (source) and real-world unlabelled point clouds (target) concurrently.
 Each branch operates on one domain by mixing selected pieces of data from the other one, and by using the semantic information derived from source labels and target pseudo-labels.
+We further extend CoSMix for the one-shot semi-supervised DA settings (SSDA). In this extension, (one-shot) target labels are easily integrated in our pipeline,
+providing additional noise-free guidance during adaptation.
 
 :fire: For more information follow the [PAPER](https://ieeexplore.ieee.org/document/10234713) link!:fire:
 
@@ -25,14 +27,15 @@ Authors: [Cristiano Saltori](https://scholar.google.com/citations?user=PID7Z4oAA
 ![teaser](assets/mix_teaser_complex.jpg)
 
 ## News :bell:
-- 8/2023: CoSMix extension to one-shot SSDA has been accepted at T-PAMI!:fire: We will update the code soon! [Paper link](https://ieeexplore.ieee.org/document/10234713)
+- 3/2024: CoSMix SSDA code has been **RELEASED**!
+- 8/2023: CoSMix extension to one-shot SSDA has been accepted at T-PAMI!:fire:  [Paper link](https://ieeexplore.ieee.org/document/10234713)
 - 12/2022: CoSMix leads the new SynLiDAR to SemanticKITTI [benchmark](https://paperswithcode.com/sota/3d-unsupervised-domain-adaptation-on-synlidar)! :rocket:
 - 7/2022: CoSMix code has been **RELEASED**!
 - 7/2022: CoSMix is accepted to ECCV 2022!:fire: Our work is the first using compositional mix between domains to allow adaptation in LiDAR segmentation!
 
 ## Installation
 The code has been tested with Docker (see Docker container below) with Python 3.8, CUDA 10.2/11.1, pytorch 1.8.0 and pytorch-lighting 1.4.1.
-Any other version may requireq to update the code for compatibility.
+Any other version may require to update the code for compatibility.
 
 ### Pip/Venv/Conda
 In your virtual environment follow [MinkowskiEnginge](https://github.com/NVIDIA/MinkowskiEngine).
@@ -48,8 +51,6 @@ Additionally, you need to install:
 
 ### Docker container
 If you want to use Docker you can find a ready-to-use container at ```crissalto/online-adaptation-mink:1.3```, just be sure to have installed drivers compatible with CUDA 11.1.
-
-
 
 
 ## Data preparation
@@ -130,7 +131,11 @@ ln -s PATH/TO/SEMANTICKITTI SemanticKITTI
 # do the same for the other datasets
 ```
 
-## Source training
+# Compositional Semantic Mix (CoSMix)
+
+![method](assets/main_chart.jpg)
+
+## Source pre-training
 
 We use SynLiDAR as source synthetic dataset. 
 The first stage of CoSMix consists of a warm-up stage in which the teacher is pretrained on the source dataset.
@@ -157,21 +162,38 @@ python train_source.py --config_file configs/source/synlidar2semanticposs.yaml
 You can download the pretrained models on both SynLiDAR2SemanticKITTI and SynLiDAR2SemanticPOSS form [here](https://drive.google.com/file/d/1cwRaIobmU0-DKDaic6Y7UX03O7MAFBV5/view?usp=sharing) and decompress them in ```cosmix-uda/pretrained_models/```.
 
 
-## Target adaptation
+## CoSMix - UDA
 
-To adapt with CoSMix on SynLiDAR2SemanticKITTI run
-
-```
-python adapt_cosmix.py --config_file configs/adaptation/synlidar2semantickitti_cosmix.yaml
-```
-
-while to adapt with CoSMix on SynLiDAR2SemanticPOSS run
+To adapt with CoSMix-UDA on SynLiDAR2SemanticKITTI run
 
 ```
-python adapt_cosmix.py --config_file configs/adaptation/synlidar2semanticposs_cosmix.yaml
+python adapt_cosmix_uda.py --config_file configs/adaptation/uda/synlidar2semantickitti_cosmix.yaml
 ```
 
-## Evaluation
+while to adapt with CoSMix-UDA on SynLiDAR2SemanticPOSS run
+
+```
+python adapt_cosmix_uda.py --config_file configs/adaptation/uda/synlidar2semanticposs_cosmix.yaml
+```
+
+
+## CoSMix - SSDA
+
+First, finetune the pre-trained model by running 
+```
+python finetune_ssda.py --config_file configs/finetuning/synlidar2semantickitti_custom.yaml
+```
+this will finetune the pre-trained model over one-shot labelled samples from the target domain (check the paper for additional info).
+
+To adapt with CoSMix-SSDA on SynLiDAR2SemanticKITTI run
+```
+python adapt_cosmix_ssda.py --config_file configs/adaptation/synlidar2semantickitti_cosmix.yaml
+```
+Repeat the same procedure for SemanticPOSS.
+
+**NB:** Remember to update model paths according to your pre-trained model path and the WANDB information of your account.
+
+# Evaluation
 
 To evaluate pretrained models after warm-up
 ```
@@ -190,7 +212,7 @@ Where ```--is_student``` specifies that the model to be evaluated is a student m
 
 You can save predictions for future visualizations by adding ```--save_predictions```.
 
-## References
+# References
 If you use our work, please cite us:
 ```
 @article{saltori2023compositional,
